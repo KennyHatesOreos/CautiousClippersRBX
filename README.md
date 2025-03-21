@@ -11,6 +11,6 @@ Script Features
 -Unlock All Rooms
 -Much More!
 
-Script: loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+Script: loadstring(game:HttpGet(('https://raw.githubusercontent.com/KennyHatesOreos/CautiousClippersRBX/refs/heads/main/CautiousClippersScript'),true))()
 
 Last Updated: 3/21/2025
