@@ -1,81 +1,299 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "Cautious Clippers",
-   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
-   LoadingTitle = "Rayfield Interface Suite",
-   LoadingSubtitle = "by Sirius",
-   Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+   Icon = 0,
+   LoadingTitle = "Roblox Catious Clippers Script",
+   LoadingSubtitle = "by OreoScripts",
+   Theme = "DarkBlue",
 
    DisableRayfieldPrompts = false,
-   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+   DisableBuildWarnings = false,
 
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = nil, -- Create a custom folder for your hub/game
+      FolderName = nil,
       FileName = "Cautious Clippers"
    },
 
    Discord = {
-      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
-      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
-      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+      Enabled = false,
+      Invite = "noinvitelink",
+      RememberJoins = true
    },
 
-   KeySystem = false, -- Set this to true to use our key system
-   KeySettings = {
-      Title = "Untitled",
-      Subtitle = "Key System",
-      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
-      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-   }
+   KeySystem = false
 })
-local Tab = Window:CreateTab("HairCuts", 4483362458) -- Title, Image
-local Section = Tab:CreateSection("AutoFarm")
-local Button = Tab:CreateButton({
-   Name = "Auto Haircut (CANT TURN OFF)",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-  -- Define part name
-local partName = "AudioHolder"
 
--- Function to remove all parts with the specified name
-local function removeAllParts()
-    for _, part in pairs(workspace:GetChildren()) do
-        if part:IsA("BasePart") and part.Name == partName then
-            part:Destroy()
-            print("Deleted: " .. partName)
+local Tab = Window:CreateTab("Main", 4483362458) 
+local Section = Tab:CreateSection("AutoFarm")
+
+local toggleHaircut = false
+
+local Toggle = Tab:CreateToggle({
+    Name = "Auto Haircut",
+    CurrentValue = false,
+    Flag = "AutoHaircut",
+    Callback = function(Value)
+        toggleHaircut = Value
+    end
+})
+
+spawn(function()
+    while wait(0.5) do
+        if toggleHaircut then
+            local partName = "AudioHolder"
+
+            local function removeAllParts()
+                for _, part in pairs(workspace:GetChildren()) do
+                    if part:IsA("BasePart") and part.Name == partName then
+                        part:Destroy()
+                    end
+                end
+            end
+
+            local args = {
+                [1] = "ValidateStylingMiniGame",
+                [2] = 4,
+                [3] = "Green"
+            }
+
+            local serverEvent = game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+                :WaitForChild("EventManagerClient")
+                :WaitForChild("ServerEvent")
+
+            removeAllParts()
+            serverEvent:FireServer(unpack(args))
         end
     end
+end)
+
+
+local toggleEnabled = false  
+
+local Toggle = Tab:CreateToggle({
+    Name = "Dirt Farm (Risk?)",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        toggleEnabled = Value  
+    end
+})
+local Button = Tab:CreateButton({
+   Name = "Instant 130K",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   for i = 1, 12 do
+    local args = {
+        [1] = "ClaimFreeGift",
+        [2] = i
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("EventManagerClient")
+        :WaitForChild("ServerEvent")
+        :FireServer(unpack(args))
 end
-
--- Define arguments for the server event
-local args = {
-    [1] = "ValidateStylingMiniGame",
-    [2] = 4,
-    [3] = "Green"
-}
-
--- Get the server event
-local serverEvent = game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("EventManagerClient"):WaitForChild("ServerEvent")
-
--- Main loop
-while wait(0.5) do
-    removeAllParts()
-    serverEvent:FireServer(unpack(args))
-end
-
    end,
 })
 
-local Tab = Window:CreateTab("Crates", 4483362458) -- Title, Image
-local Section = Tab:CreateSection("Premium")
+spawn(function()
+    while wait(0.25) do
+        if toggleEnabled then
+            local args = {
+                [1] = "CleanedDirtPile"
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+                :WaitForChild("EventManagerClient")
+                :WaitForChild("ServerEvent")
+                :FireServer(unpack(args))
+        end
+    end
+end) 
+local Divider = Tab:CreateDivider()
+local Section = Tab:CreateSection("Workers")
 local Button = Tab:CreateButton({
-   Name = "Give Squid Crate",
+   Name = "Buy All Workers",
    Callback = function()
    -- The function that takes place when the button is pressed
+   for i = 1, 4 do -- Loop through worker IDs 1 to 4
+    local args = {
+        [1] = "HireWorker",
+        [2] = tostring(i), -- Convert the number to a string
+        [3] = 1
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("FunctionManagerClient")
+        :WaitForChild("ServerFunction")
+        :InvokeServer(unpack(args))
+end
+   end,
+})
+local Button = Tab:CreateButton({
+   Name = "Max Upgrade All",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+for i = 1, 4 do -- Loop through worker IDs 1 to 4
+    for j = 1, 4 do -- Upgrade each worker 4 times
+        local args = {
+            [1] = "UpgradeWorker",
+            [2] = {
+                ["ID"] = tostring(i), -- Convert the number to a string
+                ["Action"] = "Upgrade",
+                ["Price"] = 1
+            }
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+            :WaitForChild("FunctionManagerClient")
+            :WaitForChild("ServerFunction")
+            :InvokeServer(unpack(args))
+    end
+end
+   end,
+})
+local Tab = Window:CreateTab("Machines", 4483362458) -- Title, Image
+local Section = Tab:CreateSection("Auto Buy")
+local Button = Tab:CreateButton({
+   Name = "Buy All",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   local stations = {"LegWash", "HairDyer", "HairGrowing", "HairDryer"}
+
+for _, station in ipairs(stations) do
+    local args = {
+        [1] = "PurchaseStation",
+        [2] = station,
+        [3] = 1
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("FunctionManagerClient")
+        :WaitForChild("ServerFunction")
+        :InvokeServer(unpack(args))
+end
+   end,
+})
+local Section = Tab:CreateSection("Auto Upgrade")
+local Button = Tab:CreateButton({
+   Name = "Upgrade All",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   local stations = {
+    {ID = "LegWash", Price = 1},
+    {ID = "HairDyer", Price = 1},
+    {ID = "HairGrowing", Price = 1},
+    {ID = "HairDryer", Price = 1} -- Added HairDryer
+}
+
+for i = 1, 4 do
+    for _, station in ipairs(stations) do
+        local args = {
+            [1] = "UpgradeStation",
+            [2] = {
+                ["ID"] = station.ID,
+                ["Action"] = "Upgrade",
+                ["Price"] = station.Price
+            }
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+            :WaitForChild("FunctionManagerClient")
+            :WaitForChild("ServerFunction")
+            :InvokeServer(unpack(args))
+    end
+end
+   end,
+})
+local Section = Tab:CreateSection("Auto Repair")
+local Toggle = Tab:CreateToggle({
+   Name = "Auto Repair Stations",
+   CurrentValue = false,
+   Flag = "AutoRepair",
+   Callback = function(Value)
+       if Value then
+           _G.RepairingStations = true
+           while _G.RepairingStations do
+               wait(60) -- Wait 60 seconds before running again
+
+               local stations = {"LegWash", "HairDryer", "HairGrowing", "HairDyer"}
+
+               for _, station in ipairs(stations) do
+                   local args = {
+                       [1] = "RepairStation",
+                       [2] = station
+                   }
+
+                   game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+                       :WaitForChild("FunctionManagerClient")
+                       :WaitForChild("ServerFunction")
+                       :InvokeServer(unpack(args))
+               end
+           end
+       else
+           _G.RepairingStations = false -- Stops the loop when toggled off
+       end
+   end,
+})
+local Tab = Window:CreateTab("Rebirth", 4483362458) -- Title, Image
+local Section = Tab:CreateSection("Rebirth options")
+local Button = Tab:CreateButton({
+   Name = "5X Rebirth",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   local args = {
+    [1] = "Rebirth"
+}
+
+for i = 1, 5 do
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("EventManagerClient")
+        :WaitForChild("ServerEvent")
+        :FireServer(unpack(args))
+end
+   end,
+})
+local Button = Tab:CreateButton({
+   Name = "10X Rebirth",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   local args = {
+    [1] = "Rebirth"
+}
+
+for i = 1, 10 do
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("EventManagerClient")
+        :WaitForChild("ServerEvent")
+        :FireServer(unpack(args))
+end
+   end,
+})
+local Divider = Tab:CreateDivider()
+local Section = Tab:CreateSection("RISK!")
+local Button = Tab:CreateButton({
+   Name = "300X REBIRTH",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+local args = {
+    [1] = "Rebirth"
+}
+
+for i = 1, 300 do
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("EventManagerClient")
+        :WaitForChild("ServerEvent")
+        :FireServer(unpack(args))
+end
+   end,
+})
+local Tab = Window:CreateTab("Crates", 4483362458) 
+local Section = Tab:CreateSection("Give Crates")
+
+local Button = Tab:CreateButton({
+   Name = "Give Squid Crate (Need ATLEAST $1)",
+   Callback = function()
+   
    local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Special",
@@ -87,12 +305,187 @@ local Button = Tab:CreateButton({
 game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
    end,
    })
-local Tab = Window:CreateTab("Areas", 4483362458) -- Title, Image
+   local Button = Tab:CreateButton({
+   Name = "Give Basic Chair Crate (Need ATLEAST $1)",
+   Callback = function()
+   
+local args = {
+    [1] = "BuyCrateWithCash",
+    [2] = "Chair",
+    [3] = "Basic",
+    [4] = 999,
+    [5] = 1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
+   end,
+   })
+   local Button = Tab:CreateButton({
+   Name = "Give Premium Chair Crate (Need ATLEAST $1)",
+   Callback = function()
+   
+local args = {
+    [1] = "BuyCrateWithCash",
+    [2] = "Chair",
+    [3] = "Premium",
+    [4] = 999,
+    [5] = 1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
+   end,
+   })
+      local Button = Tab:CreateButton({
+   Name = "Give Basic Scissor Crate (Need ATLEAST $1)",
+   Callback = function()
+   
+local args = {
+    [1] = "BuyCrateWithCash",
+    [2] = "Scissors",
+    [3] = "Basic",
+    [4] = 999,
+    [5] = 1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
+   end,
+   })
+        local Button = Tab:CreateButton({
+   Name = "Give Premium Scissor Crate (Need ATLEAST $1)",
+   Callback = function()
+   
+local args = {
+    [1] = "BuyCrateWithCash",
+    [2] = "Scissors",
+    [3] = "Premium",
+    [4] = 999,
+    [5] = 1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
+   end,
+   })
+           local Button = Tab:CreateButton({
+   Name = "Give Premium Decoration Crate (Need ATLEAST $1)",
+   Callback = function()
+   
+local args = {
+    [1] = "BuyCrateWithCash",
+    [2] = "Decoration",
+    [3] = "Premium",
+    [4] = 999,
+    [5] = 1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
+   end,
+   })
+              local Button = Tab:CreateButton({
+   Name = "Give Basic Decoration Crate (Need ATLEAST $1)",
+   Callback = function()
+   
+local args = {
+    [1] = "BuyCrateWithCash",
+    [2] = "Decoration",
+    [3] = "Basic",
+    [4] = 999,
+    [5] = 1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("FunctionManagerClient"):WaitForChild("ServerFunction"):InvokeServer(unpack(args))
+   end,
+   })
+   local Divider = Tab:CreateDivider()
+   local Section = Tab:CreateSection("Open Crates")
+   local Button = Tab:CreateButton({
+   Name = "Open All Once",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+local crates = {"Special", "Chair", "Scissors", "Decoration"} -- List of crate types
+local tiers = {"Basic", "Premium", "Special"} -- List of crate tiers
+
+for _, crate in ipairs(crates) do
+    for _, tier in ipairs(tiers) do
+        -- Open the crate
+        local openArgs = {
+            [1] = "OpenCrate",
+            [2] = crate,
+            [3] = tier
+        }
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+            :WaitForChild("FunctionManagerClient")
+            :WaitForChild("ServerFunction")
+            :InvokeServer(unpack(openArgs))
+
+        -- Claim the reward for the opened crate
+        local rewardArgs = {
+            [1] = "GiveCrateReward",
+            [2] = tier .. " " .. crate .. " Crate"
+        }
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+            :WaitForChild("EventManagerClient")
+            :WaitForChild("ServerEvent")
+            :FireServer(unpack(rewardArgs))
+    end
+end
+   end,
+})
+local toggleEnabled = false -- Variable to store toggle state
+
+-- Create UI Toggle
+local Toggle = Tab:CreateToggle({
+    Name = "Auto Open Crates",
+    CurrentValue = false,
+    Flag = "AutoCrates",
+    Callback = function(Value)
+        toggleEnabled = Value -- Update the toggle state
+    end
+})
+
+-- Looping function
+spawn(function()
+    while wait(1) do -- Adjust wait time if needed
+        if toggleEnabled then
+            local crates = {"Special", "Chair", "Scissors", "Decoration"} -- List of crate types
+            local tiers = {"Basic", "Premium", "Special"} -- List of crate tiers
+
+            for _, crate in ipairs(crates) do
+                for _, tier in ipairs(tiers) do
+                    -- Open the crate
+                    local openArgs = {
+                        [1] = "OpenCrate",
+                        [2] = crate,
+                        [3] = tier
+                    }
+                    
+                    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+                        :WaitForChild("FunctionManagerClient")
+                        :WaitForChild("ServerFunction")
+                        :InvokeServer(unpack(openArgs))
+
+                    -- Claim the reward for the opened crate
+                    local rewardArgs = {
+                        [1] = "GiveCrateReward",
+                        [2] = tier .. " " .. crate .. " Crate"
+                    }
+                    
+                    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+                        :WaitForChild("EventManagerClient")
+                        :WaitForChild("ServerEvent")
+                        :FireServer(unpack(rewardArgs))
+                end
+            end
+        end
+    end
+end)
+local Tab = Window:CreateTab("Areas", 4483362458) 
 local Section = Tab:CreateSection("Doors")
 local Button = Tab:CreateButton({
    Name = "Open All",
    Callback = function()
-   -- The function that takes place when the button is pressed
+   
 local doorIDs = {"1", "3", "2"}
 
 for _, doorID in ipairs(doorIDs) do
@@ -110,4 +503,37 @@ for _, doorID in ipairs(doorIDs) do
 end
     end,
     })
+    local Section = Tab:CreateSection("Decorations")
+local Button = Tab:CreateButton({
+   Name = "Buy All Decoration Slots",
+   Callback = function()
+      local areas = {1, 2, 3, 4} -- Now includes Area 4
+      local maxSlots = 12 -- Maximum number of decoration slots per area
+
+      for _, area in ipairs(areas) do
+         for slot = 1, maxSlots do
+            local args = {
+               [1] = "BuyDecorationSlot",
+               [2] = tostring(area),  -- Area (1, 2, 3, or 4)
+               [3] = tostring(slot),  -- Slot number (1 to 12)
+               [4] = 1                -- Quantity (Always 1)
+            }
+
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+               :WaitForChild("FunctionManagerClient")
+               :WaitForChild("ServerFunction")
+               :InvokeServer(unpack(args))
+         end
+      end
+   end
+})
+local Tab = Window:CreateTab("Settings", 4483362458) -- Title, Image
+local Section = Tab:CreateSection("Settings")
+local Button = Tab:CreateButton({
+   Name = "Close UI",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   Rayfield:Destroy()
+   end,
+})
 Rayfield:LoadConfiguration()
