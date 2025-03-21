@@ -4,8 +4,13 @@ https://www.roblox.com/games/94461632941378/Cautious-Clippers
 
 Script Features
 -Auto Haircut
--Give Crates (premium included)
+-Dirt Farm
+-Instant 130K
+-Give Crates (Squid Game included)
 -Open All doors
--More Coming soon!
+-Unlock All Rooms
+-Much More!
+
+Script: loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 
 Last Updated: 3/21/2025
