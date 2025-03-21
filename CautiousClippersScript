@@ -298,7 +298,7 @@ local Button = Tab:CreateButton({
     [1] = "BuyCrateWithCash",
     [2] = "Special",
     [3] = "Premium",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
@@ -313,7 +313,7 @@ local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Chair",
     [3] = "Basic",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
@@ -328,7 +328,7 @@ local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Chair",
     [3] = "Premium",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
@@ -343,7 +343,7 @@ local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Scissors",
     [3] = "Basic",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
@@ -358,7 +358,7 @@ local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Scissors",
     [3] = "Premium",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
@@ -373,7 +373,7 @@ local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Decoration",
     [3] = "Premium",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
@@ -388,7 +388,7 @@ local args = {
     [1] = "BuyCrateWithCash",
     [2] = "Decoration",
     [3] = "Basic",
-    [4] = 500,
+    [4] = 100,
     [5] = 1
 }
 
