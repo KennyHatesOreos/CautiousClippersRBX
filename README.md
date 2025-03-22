@@ -13,4 +13,4 @@ Script Features
 
 Script: loadstring(game:HttpGet(('https://raw.githubusercontent.com/KennyHatesOreos/CautiousClippersRBX/refs/heads/main/CautiousClippersScript'),true))()
 
-Last Updated: 3/21/2025
+Last Updated: 3/22/2025
