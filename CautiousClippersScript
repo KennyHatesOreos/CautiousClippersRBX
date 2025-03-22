@@ -287,8 +287,24 @@ for i = 1, 300 do
 end
    end,
 })
+local Button = Tab:CreateButton({
+   Name = "1000X REBIRTH (RISK!!!!)",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+local args = {
+    [1] = "Rebirth"
+}
+
+for i = 1, 1000 do
+    game:GetService("ReplicatedStorage"):WaitForChild("Modules")
+        :WaitForChild("EventManagerClient")
+        :WaitForChild("ServerEvent")
+        :FireServer(unpack(args))
+end
+   end,
+})
 local Tab = Window:CreateTab("Crates", 4483362458) 
-local Section = Tab:CreateSection("Give Crates")
+local Section = Tab:CreateSection("Give Crates (Risk?)")
 
 local Button = Tab:CreateButton({
    Name = "Give Squid Crate (Need ATLEAST $1)",
